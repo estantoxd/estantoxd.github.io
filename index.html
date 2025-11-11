@@ -1,71 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonsuzluk Yörüngesi: Hilal & Emre</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font: Great Vibes (Zarif) ve Inter (Okunaklı) -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Uzay Teması Arka Planı */
+            background: #000000;
+            background-image: radial-gradient(circle at top right, #00808033, transparent), 
+                              radial-gradient(circle at bottom left, #f472b633, transparent);
+            background-attachment: fixed;
+            min-height: 100vh;
+            /* Metin seçimini ve kopyalamayı engeller */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        .text-great-vibes {
+            font-family: 'Great Vibes', cursive;
+        }
+        /* Teal (Su Yeşili) ve Pink (Aşk/Gümüş) Vurgular */
+        .card-bg {
+            background-color: rgba(0, 0, 0, 0.5); /* Koyu şeffaf kart */
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(0, 128, 128, 0.3); /* Hafif Teal çerçeve */
+        }
+        .shadow-cosmic {
+            box-shadow: 0 0 15px rgba(0, 128, 128, 0.5), /* Teal Glow */
+                        0 0 10px rgba(244, 114, 182, 0.4); /* Pembe Glow */
+        }
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .countdown-value {
+            font-size: 2.5rem;
+            line-height: 1;
+            font-weight: 700;
+            color: #38bdf8; /* Parlak Mavi/Gökyüzü */
+        }
+        @media (min-width: 640px) {
+            .countdown-value {
+                font-size: 3rem;
+            }
+        }
+    </style>
 </head>
-<body>
+<!-- Sağ tık menüsünü devre dışı bırakır -->
+<body class="min-h-screen text-white" oncontextmenu="return false;">
 
-<section class="section-prices">
-    <h2 class="section-header">Our Pricing</h2>
-    <div class="list-boxs">
-        <div class="card starter">
-            <div class="head">
-                Starter
-            </div>
-            <div class="ticket">$5.90</div>
-            <div class="body">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore
-                    magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                    commodo
-                    consequat.
-                </p>
-                <button class="btn">Order Now</button>
-            </div>
-        </div>
-        <div class="card standard">
-            <div class="head">
-                Standard
-            </div>
-            <div class="ticket">$10.50</div>
-            <div class="body">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore
-                    magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                    commodo
-                    consequat.
-                </p>
-                <button class="btn">Order Now</button>
-            </div>
-        </div>
-        <div class="card premium">
-            <div class="head">
-                Premium
-            </div>
-            <div class="ticket">$15.90</div>
-            <div class="body">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore
-                    magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                    commodo
-                    consequat.
-                </p>
-                <button class="btn">Order Now</button>
-            </div>
-        </div>
-    </div>
-</section>
+    <!-- Ana Konteyner -->
+    <div id="app" class="max-w-xl mx-auto p-4 md:p-8 space-y-12">
 
-</body>
-</html>
+        <!-- A. Giriş (Hilal ve Emre'nin Yörüngesi) -->
+        <header class="text-center pt-8 pb-4">
+            <div class="mb-4">
+                <!-- Hilal Şeklinde Ay İkonu (SVG) ve Emoji Eklendi -->
+                <p class="text-8xl">🌘</p>
+            </div>
+            <h1 class="text-6xl text-great-vibes text-teal-300 mb-2 leading-none">
+                Sonsuzluk Yörüngesi
+            </h1>
+            <h2 class="text-3xl font-bold text-pink-400">
+                Hilal & Emre
+            </h2>
+            <p class="text-gray-400 mt-2 italic">Aşkımız, Evrenin En Güzel Takımyıldızı...</p>
+        </header>
+
+        <!-- B. Bölüm 1: Kalplerin İletişimi (Kozmik Sözler) -->
+        <section class="card-bg p-6 rounded-xl shadow-cosmic">
+            <h3 class="text-3xl text-center text-teal-400 mb-6 font-bold">Kozmik Sözlerimiz</h3>
+            
+            <div class="space-y-6">
+                <!-- Emre'den Hilal'e Söz (Su Yeşili/Mavi Vurgu) -->
+                <div class="p-4 rounded-xl bg-cyan-700/50 relative border-l-4 border-cyan-400">
+                    <span class="absolute top-0 right-0 p-2 text-3xl">👨‍🚀</span>
+                    <p class="font-semibold text-lg mb-1 text-cyan-200">Emre'den Hilal'e:</p>
+                    <p class="italic text-gray-100">"Sana baktığımda tüm gökyüzünü görüyorum. Artık yörüngem sensin."</p>
+                </div>
+
+                <!-- Hilal'den Emre'ye Söz (Pembe/Gümüş Vurgu) -->
+                <div class="p-4 rounded-xl bg-pink-700/50 relative border-l-4 border-pink-400">
+                    <span class="absolute top-0 right-0 p-2 text-3xl">💖</span>
+                    <p class="font-semibold text-lg mb-1 text-pink-200">Hilal'den Emre'ye (Mock):</p>
+                    <p class="italic text-gray-100">"Sen benim kararlı çekim gücümsün. Gülüşün, en karanlık gecede bile yolu aydınlatan hilal gibi."</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- C. Bölüm 2: Geri Sayım Koleksiyonu (Kozmik Takvim) -->
+        <section class="card-bg p-6 rounded-xl shadow-cosmic text-center">
+            <h3 class="text-3xl text-teal-400 mb-6 font-bold">Kozmik Takvim</h3>
+            
+            <div id="countdown-container" class="space-y-6">
+                <!-- Hilal'in Doğum Günü Sayacı -->
+                <div class="p-4 rounded-lg bg-gray-800 border border-pink-500/50">
+                    <p class="text-xl font-semibold mb-2 text-pink-300">Hilal'in Doğum Günü (24 Mayıs)</p>
+                    <div id="countdown-hilal-bday" class="grid grid-cols-4 gap-2"></div>
+                </div>
+
+                <!-- Emre'nin Doğum Günü Sayacı -->
+                <div class="p-4 rounded-lg bg-gray-800 border border-cyan-500/50">
+                    <p class="text-xl font-semibold mb-2 text-cyan-300">Emre'nin Doğum Günü (6 Mart)</p>
+                    <div id="countdown-emre-bday" class="grid grid-cols-4 gap-2"></div>
+                </div>
+
+                <!-- Yıl Dönümü Sayacı -->
+                <div class="p-4 rounded-lg bg-gray-800 border border-teal-500/50">
+                    <p class="text-xl font-semibold mb-2 text-teal-300">Yıl Dönümümüz (3 Eylül)</p>
+                    <div id="countdown-anniversary" class="grid grid-cols-4 gap-2"></div>
