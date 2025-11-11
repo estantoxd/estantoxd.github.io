@@ -134,29 +134,29 @@
                 <div class="flex items-start card-bg p-3 rounded-xl border border-teal-400/30">
                     <span class="text-2xl mr-4 mt-1">🔭</span>
                     <div>
-                        <p class="font-bold text-lg text-teal-300">Keşif Anı (3 Eylül)</p>
+                        <p class="font-bold text-lg text-teal-300">İlk Temasımız (Yıl Dönümü)</p>
                         <p class="text-gray-300 italic text-sm">3 Eylül 2024: Tüm evrenin yerini değiştiren çekim gücünün başlangıcı.</p>
-                        <span class="text-xs text-gray-500">20.09.2024</span>
+                        <span class="text-xs text-gray-500">3.09.2024</span>
                     </div>
                 </div>
                 
-                <!-- Anı 2 (Rüyalar Şehri) -->
+                <!-- Anı 2 (Emre'nin Doğum Günü) -->
                 <div class="flex items-start card-bg p-3 rounded-xl border border-teal-400/30">
                     <span class="text-2xl mr-4 mt-1">🚀</span>
                     <div>
-                        <p class="font-bold text-lg text-teal-300">Yıldızlararası Seyahat</p>
-                        <p class="text-gray-300 italic text-sm">Birlikte çıktığımız ilk yolculuk. El ele, tüm dünyayı keşfedeceğimize söz verdik.</p>
-                        <span class="text-xs text-gray-500">15.01.2025</span>
+                        <p class="font-bold text-lg text-teal-300">Emre'nin Yörüngeye Girdiği Gün</p>
+                        <p class="text-gray-300 italic text-sm">Emre'nin dünyayı onurlandırdığı ve benim yörüngeme girdiği özel gün.</p>
+                        <span class="text-xs text-gray-500">06.03.2006</span>
                     </div>
                 </div>
 
-                <!-- Anı 3 (Ay Işığında) -->
+                <!-- Anı 3 (Hilal'in Doğum Günü) -->
                 <div class="flex items-start card-bg p-3 rounded-xl border border-teal-400/30">
                     <span class="text-2xl mr-4 mt-1">🌌</span>
                     <div>
-                        <p class="font-bold text-lg text-teal-300">Ay Işığında Dans</p>
-                        <p class="text-gray-300 italic text-sm">O gece hilal bizi izliyordu. Sonsuzluğumuzun başladığı an.</p>
-                        <span class="text-xs text-gray-500">03.03.2025</span>
+                        <p class="font-bold text-lg text-teal-300">Hilal'in Işıldamaya Başladığı An</p>
+                        <p class="text-gray-300 italic text-sm">Tüm galaksi için bir yıldızın doğduğu, gökyüzünün en parlak olduğu an.</p>
+                        <span class="text-xs text-gray-500">24.05.2006</span>
                     </div>
                 </div>
             </div>
@@ -171,4 +171,107 @@
                     "Her gezegenin bir yörüngesi, her yıldızın bir ışığı olduğu gibi, benim de Sonsuzluk Yörüngem sensin. Seni her zaman seveceğim Hilal/Emre."
                 </p>
                 <div class="text-left mt-6">
-                    <p class="font-bold text-lg text-
+                    <p class="font-bold text-lg text-teal-300 mb-2">Gelecek Nebulalarımız:</p>
+                    <ul class="text-gray-300 space-y-1 list-none">
+                        <li class="flex items-center">
+                            <span class="text-pink-400 mr-2">⭐</span> Birlikte bir kedi sahiplenmek ve ona "Kozmik Karam" adını vermek.
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-pink-400 mr-2">⭐</span> Kuzey Işıklarını el ele, evrenin içinde izlemek.
+                        </li>
+                        <li class="flex items-center">
+                            <span class="text-pink-400 mr-2">⭐</span> Bir gün, Ay'dan görünen bir yerde yaşamak.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p class="text-gray-500 mt-6 text-sm">Emre'den Hilal'e, Sonsuza Dek.</p>
+        </section>
+
+    </div>
+
+    <script>
+        // Hedef tarihin bir sonraki gerçekleşme tarihini hesaplayan yardımcı fonksiyon
+        function getNextDate(month, day) {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            // JavaScript'te aylar 0 (Ocak) ile başlar, bu yüzden month - 1
+            let nextDate = new Date(currentYear, month - 1, day);
+
+            // Eğer bu yılki tarih geçmişse, bir sonraki yıla ayarla
+            if (nextDate.getTime() < now.getTime()) {
+                nextDate.setFullYear(currentYear + 1);
+            }
+            // Saati 00:00:00 olarak ayarla (gün bitimi)
+            nextDate.setHours(0, 0, 0, 0);
+            return nextDate.getTime();
+        }
+
+        // Geri Sayım Başlatma Fonksiyonu
+        function startCountdown() {
+            // Tanımlanan tüm hedef tarihler (Ay 1-12 arasında girilir)
+            const targets = [
+                // 24 Mayıs (5. ay)
+                { id: "hilal-bday", name: "Hilal'in Doğum Günü", month: 5, day: 24, target: getNextDate(5, 24) }, 
+                // 6 Mart (3. ay)
+                { id: "emre-bday", name: "Emre'nin Doğum Günü", month: 3, day: 6, target: getNextDate(3, 6) },
+                // 3 Eylül (9. ay)
+                { id: "anniversary", name: "Yıl Dönümümüz", month: 9, day: 3, target: getNextDate(9, 3) } 
+            ];
+
+            const updateCountdown = () => {
+                const now = new Date().getTime();
+
+                targets.forEach(target => {
+                    const distance = target.target - now;
+                    const countdownEl = document.getElementById(`countdown-${target.id}`);
+
+                    if (!countdownEl) return;
+
+                    // Hesaplamalar
+                    if (distance < 0) {
+                         // Eğer süre bittiyse (negatifse), bir sonraki yılın tarihini hesapla
+                        target.target = getNextDate(target.month, target.day);
+                        const newDistance = target.target - now;
+
+                        // Kutlama mesajını göster
+                        if (newDistance > -86400000 && newDistance < 0) { // Son 24 saat içinde ise kutla
+                           countdownEl.innerHTML = '<p class="col-span-4 text-xl sm:text-2xl text-pink-400 font-bold">🎉 KUTLU OLSUN! 🎉</p>';
+                           return;
+                        }
+
+                        // Eğer yeni hesaplanan tarih de geçmişse (teknik olarak olmamalı), mevcut döngüyü atla
+                        if (newDistance < 0) return;
+                    }
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    // HTML içeriğini oluşturma
+                    const formatTime = (time, label) => `
+                        <div class="countdown-item card-bg p-2 rounded-lg border-2 border-teal-400/50 shadow-md">
+                            <p class="countdown-value">${String(time).padStart(2, '0')}</p>
+                            <p class="text-xs text-gray-400">${label}</p>
+                        </div>
+                    `;
+
+                    countdownEl.innerHTML = 
+                        formatTime(days, "GÜN") + 
+                        formatTime(hours, "SAAT") + 
+                        formatTime(minutes, "DAKİKA") + 
+                        formatTime(seconds, "SANİYE");
+                });
+            };
+
+            // Sayacı hemen başlat ve her saniye güncelle
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        window.onload = startCountdown;
+    </script>
+</body>
+</html>
