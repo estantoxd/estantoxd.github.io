@@ -1,277 +1,141 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonsuzluk Yörüngesi: Hilal & Emre</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font: Great Vibes (Zarif) ve Inter (Okunaklı) -->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@100..900&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            /* Uzay Teması Arka Planı */
-            background: #000000;
-            background-image: radial-gradient(circle at top right, #00808033, transparent), 
-                              radial-gradient(circle at bottom left, #f472b633, transparent);
-            background-attachment: fixed;
-            min-height: 100vh;
-            /* Metin seçimini ve kopyalamayı engeller */
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }
-        .text-great-vibes {
-            font-family: 'Great Vibes', cursive;
-        }
-        /* Teal (Su Yeşili) ve Pink (Aşk/Gümüş) Vurgular */
-        .card-bg {
-            background-color: rgba(0, 0, 0, 0.5); /* Koyu şeffaf kart */
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(0, 128, 128, 0.3); /* Hafif Teal çerçeve */
-        }
-        .shadow-cosmic {
-            box-shadow: 0 0 15px rgba(0, 128, 128, 0.5), /* Teal Glow */
-                        0 0 10px rgba(244, 114, 182, 0.4); /* Pembe Glow */
-        }
-        .countdown-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .countdown-value {
-            font-size: 2.5rem;
-            line-height: 1;
-            font-weight: 700;
-            color: #38bdf8; /* Parlak Mavi/Gökyüzü */
-        }
-        @media (min-width: 640px) {
-            .countdown-value {
-                font-size: 3rem;
-            }
-        }
-    </style>
-</head>
-<!-- Sağ tık menüsünü devre dışı bırakır -->
-<body class="min-h-screen text-white" oncontextmenu="return false;">
+import React, { useState, useEffect } from 'react';
 
-    <!-- Ana Konteyner -->
-    <div id="app" class="max-w-xl mx-auto p-4 md:p-8 space-y-12">
+export default function App() {
+  const [noCount, setNoCount] = useState(0);
+  const [yesPressed, setYesPressed] = useState(false);
+  const [yesButtonSize, setYesButtonSize] = useState(16); // Başlangıç font boyutu
 
-        <!-- A. Giriş (Hilal ve Emre'nin Yörüngesi) -->
-        <header class="text-center pt-8 pb-4">
-            <div class="mb-4">
-                <!-- Hilal Şeklinde Ay İkonu (SVG) ve Emoji Eklendi -->
-                <p class="text-8xl">🌘</p>
-            </div>
-            <h1 class="text-6xl text-great-vibes text-teal-300 mb-2 leading-none">
-                Sonsuzluk Yörüngesi
-            </h1>
-            <h2 class="text-3xl font-bold text-pink-400">
-                Hilal & Emre
-            </h2>
-            <p class="text-gray-400 mt-2 italic">Aşkımız, Evrenin En Güzel Takımyıldızı...</p>
-        </header>
+  // "Hayır" butonuna basıldıkça değişecek metinler
+  const phrases = [
+    "Hayır",
+    "Emin misin?",
+    "Gerçekten mi?",
+    "Son kararın mı?",
+    "Bence bir daha düşün!",
+    "Kalbimi kırıyorsun...",
+    "Ağlarım ama...",
+    "Bunu yapma bana :(",
+    "Lütfen?",
+    "Çikolata alırım?",
+    "Şaka yapıyorsun değil mi?",
+    "Buna 'Hayır' diyemezsin!",
+    "Tamam, son şansın!",
+    "Sadece EVET butonu kaldı ❤️"
+  ];
 
-        <!-- B. Bölüm 1: Kalplerin İletişimi (Kozmik Sözler) -->
-        <section class="card-bg p-6 rounded-xl shadow-cosmic">
-            <h3 class="text-3xl text-center text-teal-400 mb-6 font-bold">Kozmik Sözlerimiz</h3>
-            
-            <div class="space-y-6">
-                <!-- Emre'den Hilal'e Söz (Su Yeşili/Mavi Vurgu) -->
-                <div class="p-4 rounded-xl bg-cyan-700/50 relative border-l-4 border-cyan-400">
-                    <span class="absolute top-0 right-0 p-2 text-3xl">👨‍🚀</span>
-                    <p class="font-semibold text-lg mb-1 text-cyan-200">Emre'den Hilal'e:</p>
-                    <p class="italic text-gray-100">"Sana baktığımda tüm gökyüzünü görüyorum. Artık yörüngem sensin."</p>
-                </div>
+  // O anki "Hayır" metnini getir
+  const getNoButtonText = () => {
+    return phrases[Math.min(noCount, phrases.length - 1)];
+  };
 
-                <!-- Hilal'den Emre'ye Söz (Pembe/Gümüş Vurgu) -->
-                <div class="p-4 rounded-xl bg-pink-700/50 relative border-l-4 border-pink-400">
-                    <span class="absolute top-0 right-0 p-2 text-3xl">💖</span>
-                    <p class="font-semibold text-lg mb-1 text-pink-200">Hilal'den Emre'ye :</p>
-                    <p class="italic text-gray-100">"Sen benim kararlı çekim gücümsün. Gülüşün, en karanlık gecede bile yolu aydınlatan hilal gibi."</p>
-                </div>
-            </div>
-        </section>
+  const handleNoClick = () => {
+    setNoCount(noCount + 1);
+    setYesButtonSize(yesButtonSize * 1.5); // Her "Hayır"da buton %50 büyür
+  };
 
-        <!-- C. Bölüm 2: Geri Sayım Koleksiyonu (Kozmik Takvim) -->
-        <section class="card-bg p-6 rounded-xl shadow-cosmic text-center">
-            <h3 class="text-3xl text-teal-400 mb-6 font-bold">Kozmik Takvim</h3>
-            
-            <div id="countdown-container" class="space-y-6">
-                <!-- Hilal'in Doğum Günü Sayacı -->
-                <div class="p-4 rounded-lg bg-gray-800 border border-pink-500/50">
-                    <p class="text-xl font-semibold mb-2 text-pink-300">Hilal'in Doğum Günü (24 Mayıs)</p>
-                    <div id="countdown-hilal-bday" class="grid grid-cols-4 gap-2"></div>
-                </div>
+  const handleYesClick = () => {
+    setYesPressed(true);
+    triggerConfetti();
+  };
 
-                <!-- Emre'nin Doğum Günü Sayacı -->
-                <div class="p-4 rounded-lg bg-gray-800 border border-cyan-500/50">
-                    <p class="text-xl font-semibold mb-2 text-cyan-300">Emre'nin Doğum Günü (6 Mart)</p>
-                    <div id="countdown-emre-bday" class="grid grid-cols-4 gap-2"></div>
-                </div>
+  // Konfeti (Havaifişek) Efekti
+  const triggerConfetti = () => {
+    const duration = 15 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
-                <!-- Yıl Dönümü Sayacı -->
-                <div class="p-4 rounded-lg bg-gray-800 border border-teal-500/50">
-                    <p class="text-xl font-semibold mb-2 text-teal-300">Yıl Dönümümüz (3 Eylül)</p>
-                    <div id="countdown-anniversary" class="grid grid-cols-4 gap-2"></div>
-                </div>
-            </div>
+    const randomInRange = (min, max) => Math.random() * (max - min) + min;
 
-            <p class="text-sm text-gray-400 mt-6 flex justify-center items-center">
-                <span class="mr-2">💫</span> Her bir kilometre taşı, sonsuzlukta bir nebula demektir. <span class="ml-2">💫</span>
-            </p>
-        </section>
+    const interval = setInterval(function () {
+      const timeLeft = animationEnd - Date.now();
 
-        <!-- D. Bölüm 3: Anılarımız (Galaksi Kartları) -->
-        <section class="card-bg p-6 rounded-xl shadow-cosmic">
-            <h3 class="text-3xl text-center text-teal-400 mb-6 font-bold">Galaksi Kartlarımız</h3>
-            
-            <div class="space-y-6">
-                <!-- Anı 1 (Yıl Dönümü Başlangıcı) -->
-                <div class="flex items-start card-bg p-3 rounded-xl border border-teal-400/30">
-                    <span class="text-2xl mr-4 mt-1">🔭</span>
-                    <div>
-                        <p class="font-bold text-lg text-teal-300">İlk Temasımız (Yıl Dönümü)</p>
-                        <p class="text-gray-300 italic text-sm">3 Eylül 2024: Tüm evrenin yerini değiştiren çekim gücünün başlangıcı.</p>
-                        <span class="text-xs text-gray-500">3.09.2024</span>
-                    </div>
-                </div>
-                
-                <!-- Anı 2 (Emre'nin Doğum Günü) -->
-                <div class="flex items-start card-bg p-3 rounded-xl border border-teal-400/30">
-                    <span class="text-2xl mr-4 mt-1">🚀</span>
-                    <div>
-                        <p class="font-bold text-lg text-teal-300">Emre'nin Yörüngeye Girdiği Gün</p>
-                        <p class="text-gray-300 italic text-sm">Emre'nin dünyayı onurlandırdığı ve benim yörüngeme girdiği özel gün.</p>
-                        <span class="text-xs text-gray-500">06.03.2006</span>
-                    </div>
-                </div>
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
 
-                <!-- Anı 3 (Hilal'in Doğum Günü) -->
-                <div class="flex items-start card-bg p-3 rounded-xl border border-teal-400/30">
-                    <span class="text-2xl mr-4 mt-1">🌌</span>
-                    <div>
-                        <p class="font-bold text-lg text-teal-300">Hilal'in Işıldamaya Başladığı An</p>
-                        <p class="text-gray-300 italic text-sm">Tüm galaksi için bir yıldızın doğduğu, gökyüzünün en parlak olduğu an.</p>
-                        <span class="text-xs text-gray-500">24.05.2006</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+      const particleCount = 50 * (timeLeft / duration);
+      
+      // window.confetti global olarak yüklendiğinde çalışır
+      if (window.confetti) {
+        window.confetti(
+          Object.assign({}, defaults, {
+            particleCount,
+            origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+          })
+        );
+        window.confetti(
+          Object.assign({}, defaults, {
+            particleCount,
+            origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+          })
+        );
+      }
+    }, 250);
+  };
 
-        <!-- E. Kapanış: Sonsuz Yemin -->
-        <section class="card-bg p-6 rounded-xl shadow-cosmic text-center">
-            <h3 class="text-3xl text-teal-400 mb-6 font-bold">Sonsuz Yeminimiz</h3>
-            
-            <div class="space-y-4">
-                <p class="text-secondary italic">
-                    "Her gezegenin bir yörüngesi, her yıldızın bir ışığı olduğu gibi, benim de Sonsuzluk Yörüngem sensin. Seni her zaman seveceğim Hilal/Emre."
-                </p>
-                <div class="text-left mt-6">
-                    <p class="font-bold text-lg text-teal-300 mb-2">Gelecek Nebulalarımız:</p>
-                    <ul class="text-gray-300 space-y-1 list-none">
-                        <li class="flex items-center">
-                            <span class="text-pink-400 mr-2">⭐</span> Birlikte bir kedi sahiplenmek ve ona "Kozmik Karam" adını vermek.
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-pink-400 mr-2">⭐</span> Kuzey Işıklarını el ele, evrenin içinde izlemek.
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-pink-400 mr-2">⭐</span> Bir gün, Ay'dan görünen bir yerde yaşamak.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <p class="text-gray-500 mt-6 text-sm">Emre'den Hilal'e, Sonsuza Dek.</p>
-        </section>
+  // Konfeti kütüphanesini yüklemek için
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js";
+    script.async = true;
+    document.body.appendChild(script);
 
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-pink-100 overflow-hidden selection:bg-rose-300">
+      
+      {yesPressed ? (
+        // EVET DENDİKTEN SONRAKİ EKRAN
+        <div className="flex flex-col items-center justify-center animate-bounce">
+          <div className="text-9xl mb-4">💍❤️💑</div>
+          <h1 className="text-4xl md:text-6xl font-bold text-rose-600 text-center px-4">
+            Yaşasın! Seni Çok Seviyorum!
+          </h1>
+          <p className="mt-4 text-xl text-rose-800">Sonsuza kadar beraberiz...</p>
+        </div>
+      ) : (
+        // TEKLİF EKRANI
+        <div className="flex flex-col items-center">
+          {/* Sevimli Görsel */}
+          <div className="mb-8">
+            <img 
+              src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" 
+              alt="Cute bear asking" 
+              className="rounded-lg shadow-xl w-64 h-64 object-cover"
+              onError={(e) => {e.target.style.display='none';}} // Resim yüklenmezse gizle
+            />
+             {/* Resim yüklenemezse yedek ikon */}
+             <div className="hidden last:block text-9xl animate-pulse">🐻💖</div>
+          </div>
+
+          <h1 className="text-3xl md:text-5xl font-bold text-gray-800 mb-12 text-center px-4">
+            Benimle Evlenir Misin?
+          </h1>
+
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            {/* EVET BUTONU */}
+            <button
+              className="bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-all duration-300 shadow-lg transform hover:scale-110 z-10"
+              style={{ fontSize: yesButtonSize }}
+              onClick={handleYesClick}
+            >
+              EVET
+            </button>
+
+            {/* HAYIR BUTONU */}
+            <button
+              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 shadow-lg z-0"
+              onClick={handleNoClick}
+            >
+              {noCount === 0 ? "Hayır" : getNoButtonText()}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
-
-    <script>
-        // Hedef tarihin bir sonraki gerçekleşme tarihini hesaplayan yardımcı fonksiyon
-        function getNextDate(month, day) {
-            const now = new Date();
-            const currentYear = now.getFullYear();
-            // JavaScript'te aylar 0 (Ocak) ile başlar, bu yüzden month - 1
-            let nextDate = new Date(currentYear, month - 1, day);
-
-            // Eğer bu yılki tarih geçmişse, bir sonraki yıla ayarla
-            if (nextDate.getTime() < now.getTime()) {
-                nextDate.setFullYear(currentYear + 1);
-            }
-            // Saati 00:00:00 olarak ayarla (gün bitimi)
-            nextDate.setHours(0, 0, 0, 0);
-            return nextDate.getTime();
-        }
-
-        // Geri Sayım Başlatma Fonksiyonu
-        function startCountdown() {
-            // Tanımlanan tüm hedef tarihler (Ay 1-12 arasında girilir)
-            const targets = [
-                // 24 Mayıs (5. ay)
-                { id: "hilal-bday", name: "Hilal'in Doğum Günü", month: 5, day: 24, target: getNextDate(5, 24) }, 
-                // 6 Mart (3. ay)
-                { id: "emre-bday", name: "Emre'nin Doğum Günü", month: 3, day: 6, target: getNextDate(3, 6) },
-                // 3 Eylül (9. ay)
-                { id: "anniversary", name: "Yıl Dönümümüz", month: 9, day: 3, target: getNextDate(9, 3) } 
-            ];
-
-            const updateCountdown = () => {
-                const now = new Date().getTime();
-
-                targets.forEach(target => {
-                    const distance = target.target - now;
-                    const countdownEl = document.getElementById(`countdown-${target.id}`);
-
-                    if (!countdownEl) return;
-
-                    // Hesaplamalar
-                    if (distance < 0) {
-                         // Eğer süre bittiyse (negatifse), bir sonraki yılın tarihini hesapla
-                        target.target = getNextDate(target.month, target.day);
-                        const newDistance = target.target - now;
-
-                        // Kutlama mesajını göster
-                        if (newDistance > -86400000 && newDistance < 0) { // Son 24 saat içinde ise kutla
-                           countdownEl.innerHTML = '<p class="col-span-4 text-xl sm:text-2xl text-pink-400 font-bold">🎉 KUTLU OLSUN! 🎉</p>';
-                           return;
-                        }
-
-                        // Eğer yeni hesaplanan tarih de geçmişse (teknik olarak olmamalı), mevcut döngüyü atla
-                        if (newDistance < 0) return;
-                    }
-
-                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                    // HTML içeriğini oluşturma
-                    const formatTime = (time, label) => `
-                        <div class="countdown-item card-bg p-2 rounded-lg border-2 border-teal-400/50 shadow-md">
-                            <p class="countdown-value">${String(time).padStart(2, '0')}</p>
-                            <p class="text-xs text-gray-400">${label}</p>
-                        </div>
-                    `;
-
-                    countdownEl.innerHTML = 
-                        formatTime(days, "GÜN") + 
-                        formatTime(hours, "SAAT") + 
-                        formatTime(minutes, "DAKİKA") + 
-                        formatTime(seconds, "SANİYE");
-                });
-            };
-
-            // Sayacı hemen başlat ve her saniye güncelle
-            updateCountdown();
-            setInterval(updateCountdown, 1000);
-        }
-
-        window.onload = startCountdown;
-    </script>
-</body>
-</html>
+  );
+}
