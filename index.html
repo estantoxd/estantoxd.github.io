@@ -1,141 +1,148 @@
-import React, { useState, useEffect } from 'react';
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benimle Evlenir Misin?</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
 
-export default function App() {
-  const [noCount, setNoCount] = useState(0);
-  const [yesPressed, setYesPressed] = useState(false);
-  const [yesButtonSize, setYesButtonSize] = useState(16); // Başlangıç font boyutu
+    <script type="text/babel">
+        const { useState, useEffect } = React;
 
-  // "Hayır" butonuna basıldıkça değişecek metinler
-  const phrases = [
-    "Hayır",
-    "Emin misin?",
-    "Gerçekten mi?",
-    "Son kararın mı?",
-    "Bence bir daha düşün!",
-    "Kalbimi kırıyorsun...",
-    "Ağlarım ama...",
-    "Bunu yapma bana :(",
-    "Lütfen?",
-    "Çikolata alırım?",
-    "Şaka yapıyorsun değil mi?",
-    "Buna 'Hayır' diyemezsin!",
-    "Tamam, son şansın!",
-    "Sadece EVET butonu kaldı ❤️"
-  ];
+        function App() {
+            const [noCount, setNoCount] = useState(0);
+            const [yesPressed, setYesPressed] = useState(false);
+            const [yesButtonSize, setYesButtonSize] = useState(16); // Başlangıç font boyutu
 
-  // O anki "Hayır" metnini getir
-  const getNoButtonText = () => {
-    return phrases[Math.min(noCount, phrases.length - 1)];
-  };
+            // "Hayır" butonuna basıldıkça değişecek metinler
+            const phrases = [
+                "Hayır",
+                "Emin misin?",
+                "Gerçekten mi?",
+                "Son kararın mı?",
+                "Bence bir daha düşün!",
+                "Kalbimi kırıyorsun...",
+                "Ağlarım ama...",
+                "Bunu yapma bana :(",
+                "Lütfen?",
+                "Çikolata alırım?",
+                "Şaka yapıyorsun değil mi?",
+                "Buna 'Hayır' diyemezsin!",
+                "Tamam, son şansın!",
+                "Sadece EVET butonu kaldı ❤️"
+            ];
 
-  const handleNoClick = () => {
-    setNoCount(noCount + 1);
-    setYesButtonSize(yesButtonSize * 1.5); // Her "Hayır"da buton %50 büyür
-  };
+            const getNoButtonText = () => {
+                return phrases[Math.min(noCount, phrases.length - 1)];
+            };
 
-  const handleYesClick = () => {
-    setYesPressed(true);
-    triggerConfetti();
-  };
+            const handleNoClick = () => {
+                setNoCount(noCount + 1);
+                setYesButtonSize(yesButtonSize * 1.5);
+            };
 
-  // Konfeti (Havaifişek) Efekti
-  const triggerConfetti = () => {
-    const duration = 15 * 1000;
-    const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+            const handleYesClick = () => {
+                setYesPressed(true);
+                triggerConfetti();
+            };
 
-    const randomInRange = (min, max) => Math.random() * (max - min) + min;
+            const triggerConfetti = () => {
+                const duration = 15 * 1000;
+                const animationEnd = Date.now() + duration;
+                const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
-    const interval = setInterval(function () {
-      const timeLeft = animationEnd - Date.now();
+                const randomInRange = (min, max) => Math.random() * (max - min) + min;
 
-      if (timeLeft <= 0) {
-        return clearInterval(interval);
-      }
+                const interval = setInterval(function () {
+                    const timeLeft = animationEnd - Date.now();
 
-      const particleCount = 50 * (timeLeft / duration);
-      
-      // window.confetti global olarak yüklendiğinde çalışır
-      if (window.confetti) {
-        window.confetti(
-          Object.assign({}, defaults, {
-            particleCount,
-            origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-          })
-        );
-        window.confetti(
-          Object.assign({}, defaults, {
-            particleCount,
-            origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-          })
-        );
-      }
-    }, 250);
-  };
+                    if (timeLeft <= 0) {
+                        return clearInterval(interval);
+                    }
 
-  // Konfeti kütüphanesini yüklemek için
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js";
-    script.async = true;
-    document.body.appendChild(script);
+                    const particleCount = 50 * (timeLeft / duration);
 
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+                    if (window.confetti) {
+                        window.confetti(
+                            Object.assign({}, defaults, {
+                                particleCount,
+                                origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+                            })
+                        );
+                        window.confetti(
+                            Object.assign({}, defaults, {
+                                particleCount,
+                                origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+                            })
+                        );
+                    }
+                }, 250);
+            };
 
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-pink-100 overflow-hidden selection:bg-rose-300">
-      
-      {yesPressed ? (
-        // EVET DENDİKTEN SONRAKİ EKRAN
-        <div className="flex flex-col items-center justify-center animate-bounce">
-          <div className="text-9xl mb-4">💍❤️💑</div>
-          <h1 className="text-4xl md:text-6xl font-bold text-rose-600 text-center px-4">
-            Yaşasın! Seni Çok Seviyorum!
-          </h1>
-          <p className="mt-4 text-xl text-rose-800">Sonsuza kadar beraberiz...</p>
-        </div>
-      ) : (
-        // TEKLİF EKRANI
-        <div className="flex flex-col items-center">
-          {/* Sevimli Görsel */}
-          <div className="mb-8">
-            <img 
-              src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" 
-              alt="Cute bear asking" 
-              className="rounded-lg shadow-xl w-64 h-64 object-cover"
-              onError={(e) => {e.target.style.display='none';}} // Resim yüklenmezse gizle
-            />
-             {/* Resim yüklenemezse yedek ikon */}
-             <div className="hidden last:block text-9xl animate-pulse">🐻💖</div>
-          </div>
+            return (
+                <div className="flex flex-col items-center justify-center min-h-screen bg-pink-100 overflow-hidden selection:bg-rose-300">
+                    {yesPressed ? (
+                        <div className="flex flex-col items-center justify-center animate-bounce">
+                            <div className="text-9xl mb-4">💍❤️💑</div>
+                            <h1 className="text-4xl md:text-6xl font-bold text-rose-600 text-center px-4">
+                                Yaşasın! Seni Çok Seviyorum!
+                            </h1>
+                            <p className="mt-4 text-xl text-rose-800">Sonsuza kadar beraberiz...</p>
+                        </div>
+                    ) : (
+                        <div className="flex flex-col items-center">
+                            <div className="mb-8">
+                                <img 
+                                    src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" 
+                                    alt="Cute bear asking" 
+                                    className="rounded-lg shadow-xl w-64 h-64 object-cover"
+                                    onError={(e) => {e.target.style.display='none';}}
+                                />
+                                <div className="hidden last:block text-9xl animate-pulse">🐻💖</div>
+                            </div>
 
-          <h1 className="text-3xl md:text-5xl font-bold text-gray-800 mb-12 text-center px-4">
-            Benimle Evlenir Misin?
-          </h1>
+                            <h1 className="text-3xl md:text-5xl font-bold text-gray-800 mb-12 text-center px-4">
+                                Benimle Evlenir Misin?
+                            </h1>
 
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            {/* EVET BUTONU */}
-            <button
-              className="bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-all duration-300 shadow-lg transform hover:scale-110 z-10"
-              style={{ fontSize: yesButtonSize }}
-              onClick={handleYesClick}
-            >
-              EVET
-            </button>
+                            <div className="flex flex-wrap items-center justify-center gap-4">
+                                <button
+                                    className="bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-all duration-300 shadow-lg transform hover:scale-110 z-10"
+                                    style={{ fontSize: yesButtonSize }}
+                                    onClick={handleYesClick}
+                                >
+                                    EVET
+                                </button>
 
-            {/* HAYIR BUTONU */}
-            <button
-              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 shadow-lg z-0"
-              onClick={handleNoClick}
-            >
-              {noCount === 0 ? "Hayır" : getNoButtonText()}
-            </button>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
+                                <button
+                                    className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 shadow-lg z-0"
+                                    onClick={handleNoClick}
+                                >
+                                    {noCount === 0 ? "Hayır" : getNoButtonText()}
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
